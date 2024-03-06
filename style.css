@@ -1,0 +1,63 @@
+html {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Noto Sans";
+}
+
+body {
+    background-color: #2e2d4d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.game-container {
+    width: 800px;
+    height: 800px;
+    background-color: #6d9f71;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.score-container {
+    height: 60px;
+    width: 100%;
+    background-color: #6d9f71;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.score-container h1 {
+    font-size: 25px;
+    margin: 0 1.5rem;
+}
+
+.game-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.playable-area {
+    width: 740px;
+    height: 690px;
+    border-radius: 15px;
+    border: #337357 5px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-canvas {
+    width: 750px;
+    height: 700px;
+}
