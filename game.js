@@ -1,4 +1,4 @@
-import { draw } from "./drawSnake.js";
+import { draw } from "./draw.js";
 import { keyPressed, handleMovement } from "./movement.js";
 import { Parameters } from "./parameters.js";
 
@@ -8,11 +8,7 @@ let msPrev = window.performance.now();
 const fps = Parameters.fps;
 const msPerFrame = 1000 / fps;
 
-let snakeLocations = [
-    { x: 0, y: 0 },
-    { x: -50, y: -50 },
-    { x: -100, y: -100 },
-];
+let snakeLocations = [{ x: 0, y: 0 }];
 
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
@@ -22,7 +18,7 @@ function gameLoop() {
     const excessTime = msPassed % msPerFrame;
     msPrev = msNow - excessTime;
 
-    draw(ctx, snakeLocations);
+    snakeLocations = draw(ctx, snakeLocations);
     for (let i = snakeLocations.length - 1; i >= 0; i--) {
         if (i === 0) {
             snakeLocations[i].x = handleMovement(
