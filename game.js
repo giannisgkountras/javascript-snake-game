@@ -1,30 +1,18 @@
-import { drawSnakeSquare } from "./drawSnake.js";
+import { draw } from "./drawSnake.js";
+import { keyPressed, handleMovement } from "./movement.js";
+import { Parameters } from "./parameters.js";
 
 const canvas = document.getElementById("game-canvas");
 const ctx = canvas.getContext("2d");
 let msPrev = window.performance.now();
-const fps = 60;
+const fps = Parameters.fps;
 const msPerFrame = 1000 / fps;
-const speedInput = document.getElementById("speed");
-let speed = parseInt(speedInput.value);
-let plusx = 3 * speed * 0.1;
-let plusy = 5 * speed * 0.1;
 
-speedInput.addEventListener("input", function () {
-    speed = parseInt(speedInput.value);
-    plusx = 3 * speed * 0.1 * Math.sign(plusx);
-    plusy = 5 * speed * 0.1 * Math.sign(plusy);
-});
-
-let x = 1;
-let y = 1;
-
-function randomColor() {
-    var randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    return randomColor;
-}
-
-let color = "#E4E3D3";
+let snakeLocations = [
+    { x: 0, y: 0 },
+    { x: -50, y: -50 },
+    { x: -100, y: -100 },
+];
 
 function gameLoop() {
     window.requestAnimationFrame(gameLoop);
@@ -34,22 +22,24 @@ function gameLoop() {
     const excessTime = msPassed % msPerFrame;
     msPrev = msNow - excessTime;
 
-    draw();
-    if (x > 750 - 50 || x < 0) {
-        plusx = -plusx;
-        color = randomColor();
+    draw(ctx, snakeLocations);
+    for (let i = snakeLocations.length - 1; i >= 0; i--) {
+        if (i === 0) {
+            snakeLocations[i].x = handleMovement(
+                snakeLocations[i].x,
+                snakeLocations[i].y,
+                keyPressed
+            ).x;
+            snakeLocations[i].y = handleMovement(
+                snakeLocations[i].x,
+                snakeLocations[i].y,
+                keyPressed
+            ).y;
+        } else {
+            snakeLocations[i].x = snakeLocations[i - 1].x;
+            snakeLocations[i].y = snakeLocations[i - 1].y;
+        }
     }
-    if (y > 700 - 50 || y < 0) {
-        plusy = -plusy;
-        color = randomColor();
-    }
-
-    x = x + plusx;
-    y = y + plusy;
-}
-
-function draw() {
-    drawSnakeSquare(x, y, ctx, color);
 }
 
 gameLoop();
