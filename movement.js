@@ -37,7 +37,7 @@ function handleMovement(x, y, key) {
             y = y + Parameters.moveSpeed;
             break;
         case "p":
-            console.log("braton");
+            console.log("PAUSE");
     }
     return { x, y };
 }

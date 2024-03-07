@@ -52,4 +52,18 @@ function drawApple(ctx) {
     );
 }
 
-export { drawSnakeSquare, draw };
+function checkGameOver(snakeLocations) {
+    for (let i = 0; i < snakeLocations.length; i++) {
+        for (let j = 0; j < snakeLocations.length; j++) {
+            if (
+                i != j &&
+                snakeLocations[i].x == snakeLocations[j].x &&
+                snakeLocations[i].y == snakeLocations[j].y
+            ) {
+                console.log("GAME OVER");
+            }
+        }
+    }
+}
+
+export { drawSnakeSquare, draw, randomPosition };
